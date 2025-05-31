@@ -108,3 +108,42 @@ The application consists of the following main components:
 - [Next.js](https://nextjs.org/)
 - [Tailwind CSS](https://tailwindcss.com/)
 - [shadcn/ui](https://ui.shadcn.com/)
+
+## Nouvelle architecture (Next.js + Flask)
+
+- **Frontend** : Next.js (pages, UI, appels API)
+- **Backend** : Flask (Python)
+  - Gère l'exécution des commandes système pour TightVNC et noVNC
+  - Fournit des endpoints API :
+    - `/api/start-share` : Démarre le partage d'écran (TightVNC)
+    - `/api/start-novnc` : Démarre une session noVNC pour accéder à un écran distant
+
+## Scénario d'utilisation
+
+1. **Page d'accueil** : Deux boutons
+   - Partager mon écran
+   - Accéder à un écran
+2. **Partager mon écran** :
+   - Le backend génère l'IP et le mot de passe, lance TightVNC
+   - Affiche les infos à l'utilisateur
+3. **Accéder à un écran** :
+   - L'utilisateur saisit l'IP cible
+   - Le backend lance noVNC et redirige l'utilisateur vers l'interface noVNC
+
+## Lancement du projet
+
+1. Lancer le backend Flask :
+   ```bash
+   cd backend
+   pip install -r requirements.txt
+   python app.py
+   ```
+2. Lancer le frontend Next.js :
+   ```bash
+   npm install
+   npm run dev
+   ```
+
+## Sécurité
+- Le backend exécute des commandes système, à utiliser sur un environnement de test !
+- Le mot de passe VNC est généré aléatoirement à chaque session.

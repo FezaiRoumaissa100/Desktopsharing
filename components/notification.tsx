@@ -41,7 +41,7 @@ export function Notification({ id, type, title, message, duration = 5000, onClos
   const getIcon = () => {
     switch (type) {
       case "info":
-        return <Info className="h-5 w-5 text-blue-500" />
+        return <Info className="h-5 w-5 text-green-500" />
       case "success":
         return <CheckCircle className="h-5 w-5 text-green-500" />
       case "warning":
@@ -56,7 +56,7 @@ export function Notification({ id, type, title, message, duration = 5000, onClos
   const getBgColor = () => {
     switch (type) {
       case "info":
-        return "bg-blue-50 border-blue-200"
+        return "bg-green-50 border-green-200"
       case "success":
         return "bg-green-50 border-green-200"
       case "warning":

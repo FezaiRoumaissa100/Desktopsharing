@@ -67,7 +67,7 @@ export default function DashboardPage() {
                 <p className="text-muted-foreground mt-1">Welcome back, {user?.name}</p>
               </div>
               <div className="mt-4 md:mt-0">
-                <Button onClick={() => router.push("/connect")} className="flex items-center gap-2">
+                <Button onClick={() => router.push("/start-session")} className="flex items-center gap-2">
                   <Monitor className="h-4 w-4" />
                   Start New Connection
                 </Button>
@@ -109,7 +109,7 @@ export default function DashboardPage() {
                 </CardHeader>
                 <CardContent className="pb-2">
                   <div className="space-y-2">
-                    <Button variant="outline" className="w-full justify-start" onClick={() => router.push("/connect")}>
+                    <Button variant="outline" className="w-full justify-start" onClick={() => router.push("/start-session")}>
                       <Monitor className="mr-2 h-4 w-4" />
                       New Connection
                     </Button>
