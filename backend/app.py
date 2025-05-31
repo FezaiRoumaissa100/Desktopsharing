@@ -47,11 +47,7 @@ def start_novnc():
     ip = data.get('ip')
     if not ip:
         return jsonify({'error': 'IP manquante'}), 400
-    # Exemple de commande système personnalisée pour lancer noVNC
-    # À adapter selon l'installation (exécutable, script batch, etc.)
-    # Exemple : subprocess.Popen(['C:\chemin\vers\novnc.exe', '--target', f'{ip}:5900', '--listen', 'localhost:8085'])
-    # Ou pour un script batch : subprocess.Popen(['cmd', '/c', 'start_novnc.bat', ip])
-    # Ici, on laisse un exemple générique à adapter :
+    # Exécute la commande système pour lancer noVNC
     subprocess.Popen(['novnc', '--target', f'{ip}:5900', '--listen', 'localhost:8085'])
     host_ip = request.host.split(':')[0]
     url = f'http://{host_ip}:8085'
