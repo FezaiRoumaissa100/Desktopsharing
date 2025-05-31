@@ -7,14 +7,14 @@ export default function FeaturesPage() {
     <div className="flex flex-col min-h-screen">
       <Header />
       <main className="flex-1">
-        <section className="py-20 md:py-28 bg-hero-gradient">
+        <section className="py-20 md:py-28 bg-gradient-to-br from-green-50 to-green-200 dark:from-green-950 dark:to-green-900">
           <div className="container px-4 md:px-6">
             <div className="flex flex-col items-center justify-center space-y-4 text-center">
               <div className="space-y-2">
                 <h1 className="text-3xl font-bold tracking-tighter sm:text-4xl md:text-5xl">
-                  <span className="text-primary">Powerful Features</span> for Remote Access
+                  <span className="text-green-600 dark:text-green-400">Powerful Features</span> for Remote Access
                 </h1>
-                <p className="max-w-[700px] text-muted-foreground md:text-xl/relaxed lg:text-base/relaxed xl:text-xl/relaxed">
+                <p className="max-w-[700px] text-green-800 dark:text-green-200 md:text-xl/relaxed lg:text-base/relaxed xl:text-xl/relaxed">
                   Discover all the capabilities of our browser-based remote access solution
                 </p>
               </div>

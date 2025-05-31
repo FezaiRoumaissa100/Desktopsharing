@@ -217,7 +217,7 @@ export default function ProfilePage() {
     <ProtectedRoute>
       <div className="flex flex-col min-h-screen">
         <Header />
-        <main className="flex-1 py-12 bg-hero-gradient">
+        <main className="flex-1 bg-background text-foreground">
           <div className="container px-4 md:px-6">
             <div className="flex items-center mb-6">
               <Button variant="ghost" size="sm" onClick={() => router.back()} className="mr-4">

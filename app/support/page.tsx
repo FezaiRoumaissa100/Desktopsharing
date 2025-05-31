@@ -12,15 +12,15 @@ export default function SupportPage() {
   return (
     <div className="flex flex-col min-h-screen">
       <Header />
-      <main className="flex-1">
+      <main className="flex-1 bg-background text-foreground">
         <section className="py-20 md:py-28 bg-hero-gradient">
           <div className="container px-4 md:px-6">
             <div className="flex flex-col items-center justify-center space-y-4 text-center">
               <div className="space-y-2">
                 <h1 className="text-3xl font-bold tracking-tighter sm:text-4xl md:text-5xl">
-                  <span className="text-primary">Support Center</span>
+                  <span className="text-green-600">Support Center</span>
                 </h1>
-                <p className="max-w-[700px] text-muted-foreground md:text-xl/relaxed lg:text-base/relaxed xl:text-xl/relaxed">
+                <p className="max-w-[700px] text-green-800 md:text-xl/relaxed lg:text-base/relaxed xl:text-xl/relaxed">
                   Get help with VNCConnect and find answers to common questions
                 </p>
               </div>
@@ -76,12 +76,12 @@ export default function SupportPage() {
                   <Card>
                     <CardHeader>
                       <CardTitle className="flex items-center gap-2">
-                        <FileText className="h-5 w-5 text-primary" />
+                        <FileText className="h-5 w-5 text-green-600" />
                         Documentation
                       </CardTitle>
                     </CardHeader>
                     <CardContent>
-                      <p className="text-sm text-muted-foreground mb-4">
+                      <p className="text-sm text-green-800 mb-4">
                         Browse our comprehensive documentation to learn how to use all features of VNCConnect.
                       </p>
                       <Link href="/docs">
@@ -94,12 +94,12 @@ export default function SupportPage() {
                   <Card>
                     <CardHeader>
                       <CardTitle className="flex items-center gap-2">
-                        <HelpCircle className="h-5 w-5 text-primary" />
+                        <HelpCircle className="h-5 w-5 text-green-600" />
                         Tutorials
                       </CardTitle>
                     </CardHeader>
                     <CardContent>
-                      <p className="text-sm text-muted-foreground mb-4">
+                      <p className="text-sm text-green-800 mb-4">
                         Watch video tutorials and step-by-step guides to get the most out of VNCConnect.
                       </p>
                       <Link href="/tutorials">
@@ -156,14 +156,14 @@ export default function SupportPage() {
                   <Card>
                     <CardHeader>
                       <CardTitle className="flex items-center gap-2">
-                        <Mail className="h-5 w-5 text-primary" />
+                        <Mail className="h-5 w-5 text-green-600" />
                         Email Support
                       </CardTitle>
                     </CardHeader>
                     <CardContent>
-                      <p className="text-sm text-muted-foreground">
+                      <p className="text-sm text-green-800">
                         For general inquiries, you can email us at{" "}
-                        <a href="mailto:support@vncconnect.com" className="text-primary hover:underline">
+                        <a href="mailto:support@vncconnect.com" className="text-green-600 hover:underline">
                           support@vncconnect.com
                         </a>
                       </p>
@@ -172,12 +172,12 @@ export default function SupportPage() {
                   <Card>
                     <CardHeader>
                       <CardTitle className="flex items-center gap-2">
-                        <MessageSquare className="h-5 w-5 text-primary" />
+                        <MessageSquare className="h-5 w-5 text-green-600" />
                         Live Chat
                       </CardTitle>
                     </CardHeader>
                     <CardContent>
-                      <p className="text-sm text-muted-foreground mb-4">
+                      <p className="text-sm text-green-800 mb-4">
                         Chat with our support team in real-time during business hours.
                       </p>
                       <Button className="w-full">Start Chat</Button>

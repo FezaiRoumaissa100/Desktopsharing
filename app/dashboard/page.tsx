@@ -59,7 +59,7 @@ export default function DashboardPage() {
     <ProtectedRoute>
       <div className="flex flex-col min-h-screen">
         <Header />
-        <main className="flex-1 py-12 bg-gradient-to-b from-background to-background/80">
+        <main className="flex-1 bg-background text-foreground">
           <div className="container px-4 md:px-6">
             <div className="flex flex-col md:flex-row justify-between items-start md:items-center mb-8">
               <div>
