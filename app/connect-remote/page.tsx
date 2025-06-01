@@ -3,6 +3,7 @@ import { useState } from "react"
 
 export default function ConnectRemote() {
   const [ip, setIp] = useState("")
+  const [password, setPassword] = useState("")
   const [loading, setLoading] = useState(false)
   const [error, setError] = useState("")
 
@@ -14,7 +15,7 @@ export default function ConnectRemote() {
       const res = await fetch("http://localhost:5000/api/start-novnc", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ ip })
+        body: JSON.stringify({ ip, password })
       })
       if (!res.ok) throw new Error("Erreur lors du lancement de noVNC")
       const data = await res.json()
@@ -35,6 +36,14 @@ export default function ConnectRemote() {
           placeholder="Adresse IP du poste distant"
           value={ip}
           onChange={e => setIp(e.target.value)}
+          className="border rounded px-4 py-2"
+          required
+        />
+        <input
+          type="password"
+          placeholder="Mot de passe VNC"
+          value={password}
+          onChange={e => setPassword(e.target.value)}
           className="border rounded px-4 py-2"
           required
         />

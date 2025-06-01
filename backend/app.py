@@ -71,8 +71,9 @@ def start_share():
 def start_novnc():
     data = request.get_json()
     ip = data.get('ip')
-    if not ip:
-        return jsonify({'error': 'IP manquante'}), 400
+    password = data.get('password')
+    if not ip or not password:
+        return jsonify({'error': 'IP ou mot de passe manquant'}), 400
     # Exécute la commande système pour lancer noVNC avec SSL/TLS
     try:
         subprocess.Popen([
@@ -85,8 +86,8 @@ def start_novnc():
     except Exception as e:
         return jsonify({'error': f'Erreur démarrage noVNC : {e}'}), 500
     host_ip = request.host.split(':')[0]
-    # Redirige vers l'interface web noVNC servie par Next.js (port 3000)
-    url = f'http://{host_ip}:3000/novnc/vnc.html?host={host_ip}&port=8085&encrypt=1'
+    # Redirige vers l'interface web noVNC servie par Next.js (port 3000) avec le mot de passe et autoconnect
+    url = f'http://{host_ip}:3000/novnc/vnc.html?host={host_ip}&port=8085&encrypt=1&path=/&password={password}&autoconnect=1'
     return jsonify({'url': url})
 
 if __name__ == '__main__':

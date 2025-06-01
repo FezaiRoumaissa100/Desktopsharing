@@ -121,12 +121,13 @@ const UI = {
         document.documentElement.classList.remove("noVNC_loading");
 
         let autoconnect = WebUtil.getConfigVar('autoconnect', false);
-        if (autoconnect === 'true' || autoconnect == '1') {
-            autoconnect = true;
+        let password = WebUtil.getConfigVar('password', null);
+        if ((autoconnect === 'true' || autoconnect == '1') && password) {
+            // Connexion automatique avec mot de passe
+            UI.connect(null, password);
+        } else if (autoconnect === 'true' || autoconnect == '1') {
             UI.connect();
         } else {
-            autoconnect = false;
-            // Show the connect panel on first load unless autoconnecting
             UI.openConnectPanel();
         }
 

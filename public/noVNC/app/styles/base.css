@@ -33,7 +33,7 @@
   font-family: sans-serif;
 }
 
-body {
+body, html {
   margin:0;
   padding:0;
   /*Background image with light grey curve.*/
@@ -42,10 +42,9 @@ body {
   background-position:right bottom;
   height:100%;
   touch-action: none;
-}
-
-html {
-  height:100%;
+  background: hsl(var(--background)) !important;
+  color: hsl(var(--foreground)) !important;
+  font-family: inherit !important;
 }
 
 .noVNC_only_touch.noVNC_hidden {
@@ -127,6 +126,11 @@ html {
   margin: 0 !important;
   padding: 0 !important;
   pointer-events: none;
+  background: hsl(var(--card)) !important;
+  color: hsl(var(--card-foreground)) !important;
+  border-radius: var(--radius, 8px) !important;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.06) !important;
+  border: 1px solid hsl(var(--border)) !important;
 }
 .noVNC_vcenter > * {
   pointer-events: auto;
@@ -393,6 +397,12 @@ html {
   border-radius: 6px;
   background-color: transparent;
   background-image: unset; /* we don't want the gradiant from input.css */
+  background: hsl(var(--primary)) !important;
+  color: hsl(var(--primary-foreground)) !important;
+  border-radius: var(--radius, 8px) !important;
+  border: none !important;
+  font-family: inherit !important;
+  transition: background 0.2s;
 }
 #noVNC_control_bar .noVNC_button.noVNC_selected {
   border-color: rgba(0, 0, 0, 0.8);
@@ -404,6 +414,7 @@ html {
 }
 #noVNC_control_bar .noVNC_button:not(:disabled):hover {
   background-color: rgba(255, 255, 255, 0.2);
+  background: hsl(var(--accent)) !important;
 }
 #noVNC_control_bar .noVNC_button:not(:disabled):active {
   padding-top: 5px;
@@ -443,11 +454,11 @@ html {
 
   padding: 15px;
 
-  background: #fff;
-  border-radius: 10px;
-  color: #000;
-  border: 2px solid #E0E0E0;
-  box-shadow: 6px 6px 0px rgba(0, 0, 0, 0.5);
+  background: hsl(var(--card)) !important;
+  color: hsl(var(--card-foreground)) !important;
+  border-radius: var(--radius, 8px) !important;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.06) !important;
+  border: 1px solid hsl(var(--border)) !important;
 }
 .noVNC_panel.noVNC_open {
   visibility: visible;
@@ -537,6 +548,8 @@ html {
 
 #noVNC_control_bar .noVNC_logo {
   font-size: 13px;
+  color: hsl(var(--primary)) !important;
+  font-family: inherit !important;
 }
 
 .noVNC_logo + hr {
@@ -885,8 +898,8 @@ html {
 }
 
 .noVNC_logo {
-  color:yellow;
-  font-family: 'Orbitron', 'OrbitronTTF', sans-serif;
+  color: hsl(var(--primary)) !important;
+  font-family: 'Orbitron', 'OrbitronTTF', sans-serif !important;
   line-height:90%;
   text-shadow: 0.1em 0.1em 0 black;
 }
