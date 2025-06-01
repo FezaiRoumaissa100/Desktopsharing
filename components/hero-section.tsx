@@ -4,7 +4,7 @@ import { Button } from "@/components/ui/button"
 
 export function HeroSection() {
   return (
-    <section className="py-20 md:py-28 bg-gradient-to-br from-green-50 to-green-200">
+    <section className="py-20 md:py-28 bg-hero-gradient">
       <div className="container px-4 md:px-6">
         <div className="flex flex-col items-center justify-center space-y-4 text-center">
           <div className="space-y-2">

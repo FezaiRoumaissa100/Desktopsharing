@@ -53,51 +53,47 @@ export default function HowItWorksPage() {
               </div>
 
               <div className="space-y-8">
-                <h2 className="text-2xl font-bold text-center">How to Connect in 3 Simple Steps</h2>
-                <div className="space-y-12">
-                  <div className="flex flex-col md:flex-row md:space-x-12">
+                <h2 className="text-2xl font-bold text-center mb-8">How to Connect in 3 Simple Steps</h2>
+                <div className="space-y-20">
+                  <div className="flex flex-col md:flex-row md:space-x-16 gap-10 md:gap-0">
                     <div className="flex-1">
-                      <div className="flex flex-col gap-6 items-center">
-                        <div className="space-y-4">
-                          <div className="flex h-12 w-12 items-center justify-center rounded-full bg-green-600 text-xl font-bold text-green-800">
+                      <div className="flex flex-col gap-8 items-center">
+                        <div className="space-y-6">
+                          <div className="flex h-14 w-14 items-center justify-center rounded-full bg-green-600 text-2xl font-bold text-green-800">
                             1
                           </div>
-                          <h3 className="text-xl font-bold">Generate an IP Address and Password</h3>
-                          <p className="text-green-800">
-                            On the device you want to control (the host), visit VNCConnect and click "Allow Remote Access".
-                            The system will display your local IP address and a password that you can share with the person who needs to
-                            connect.
+                          <h3 className="text-xl font-bold">Generate an Access Link</h3>
+                          <p className="text-green-800 text-base">
+                            On the host device, click "Share My Screen" and generate a secure access link. This link contains all the information needed to connect securely.
                           </p>
                         </div>
                       </div>
                     </div>
 
                     <div className="flex-1">
-                      <div className="flex flex-col gap-6 items-center">
-                        <div className="space-y-4">
-                          <div className="flex h-12 w-12 items-center justify-center rounded-full bg-green-600 text-xl font-bold text-green-800">
+                      <div className="flex flex-col gap-8 items-center">
+                        <div className="space-y-6">
+                          <div className="flex h-14 w-14 items-center justify-center rounded-full bg-green-600 text-2xl font-bold text-green-800">
                             2
                           </div>
-                          <h3 className="text-xl font-bold">Enter the IP Address and Password</h3>
-                          <p className="text-green-800">
-                            On the device you want to control from (the client), visit VNCConnect and click "Connect to
-                            Remote". Enter the IP address and password provided by the host to establish a connection.
+                          <h3 className="text-xl font-bold">Share the Link</h3>
+                          <p className="text-green-800 text-base">
+                            Copy the generated access link and send it to the person who needs to connect to your screen (for example, via chat or email).
                           </p>
                         </div>
                       </div>
                     </div>
                   </div>
 
-                  <div className="flex justify-center mt-12">
-                    <div className="flex flex-col gap-6 items-center w-full md:w-1/2">
-                      <div className="space-y-4 text-center">
-                        <div className="flex h-12 w-12 items-center justify-center rounded-full bg-green-600 text-xl font-bold text-green-800 mx-auto">
+                  <div className="flex justify-center mt-16">
+                    <div className="flex flex-col gap-8 items-center w-full md:w-1/2">
+                      <div className="space-y-6 text-center">
+                        <div className="flex h-14 w-14 items-center justify-center rounded-full bg-green-600 text-2xl font-bold text-green-800 mx-auto">
                           3
                         </div>
-                        <h3 className="text-xl font-bold">Start Remote Control</h3>
-                        <p className="text-green-800">
-                          Once connected, you'll see the remote screen in your browser. You can control the mouse and
-                          keyboard, transfer files, chat with the remote user, and use all the features of VNCConnect.
+                        <h3 className="text-xl font-bold">Connect Using the Link</h3>
+                        <p className="text-green-800 text-base">
+                          On the client device, click "Access a Screen" and paste the access link you received. You will be connected instantly to the host's screen with the appropriate permissions.
                         </p>
                       </div>
                     </div>
