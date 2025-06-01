@@ -29,7 +29,7 @@ export function Header() {
         <div className="flex justify-between items-center h-16">
           <div className="flex items-center">
             <Link href="/" className="flex items-center" onClick={closeMenu}>
-              <span className="text-xl font-bold text-green-600 dark:text-green-400">VNC Web</span>
+              <span className="text-xl font-bold text-green-600 dark:text-green-400">VNCConnect</span>
             </Link>
             <nav className="hidden md:flex ml-8 space-x-6">
               <Link
