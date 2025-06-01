@@ -14,7 +14,6 @@ import { Input } from "@/components/ui/input"
 import { Label } from "@/components/ui/label"
 import { Checkbox } from "@/components/ui/checkbox"
 import { Alert, AlertDescription } from "@/components/ui/alert"
-import { Header } from "@/components/header"
 import { Footer } from "@/components/footer"
 
 export default function SignupPage() {
@@ -77,7 +76,6 @@ export default function SignupPage() {
 
   return (
     <div className="flex flex-col min-h-screen">
-      <Header />
       <main className="flex-1 flex items-center justify-center p-4 bg-muted/40">
         <Card className="w-full max-w-md">
           <CardHeader className="space-y-1">

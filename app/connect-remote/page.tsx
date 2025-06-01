@@ -4,6 +4,7 @@ import { useState } from "react"
 export default function ConnectRemote() {
   const [ip, setIp] = useState("")
   const [password, setPassword] = useState("")
+  const [link, setLink] = useState("")
   const [loading, setLoading] = useState(false)
   const [error, setError] = useState("")
 
@@ -12,14 +13,27 @@ export default function ConnectRemote() {
     setLoading(true)
     setError("")
     try {
-      const res = await fetch("http://localhost:5000/api/start-novnc", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ ip, password })
-      })
-      if (!res.ok) throw new Error("Erreur lors du lancement de noVNC")
-      const data = await res.json()
-      window.location.href = data.url
+      if (link) {
+        // Connexion via lien unique
+        const res = await fetch("http://localhost:5000/api/use-link", {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({ link })
+        })
+        if (!res.ok) throw new Error("Lien invalide ou erreur de connexion")
+        const data = await res.json()
+        window.location.href = data.url
+      } else {
+        // Connexion classique
+        const res = await fetch("http://localhost:5000/api/start-novnc", {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({ ip, password })
+        })
+        if (!res.ok) throw new Error("Erreur lors du lancement de noVNC")
+        const data = await res.json()
+        window.location.href = data.url
+      }
     } catch (e: any) {
       setError(e.message)
     } finally {
@@ -33,20 +47,31 @@ export default function ConnectRemote() {
       <form onSubmit={handleConnect} className="flex flex-col gap-4 w-80">
         <input
           type="text"
-          placeholder="Adresse IP du poste distant"
-          value={ip}
-          onChange={e => setIp(e.target.value)}
+          placeholder="Coller ici le lien d'accès (optionnel)"
+          value={link}
+          onChange={e => setLink(e.target.value)}
           className="border rounded px-4 py-2"
-          required
         />
-        <input
-          type="password"
-          placeholder="Mot de passe VNC"
-          value={password}
-          onChange={e => setPassword(e.target.value)}
-          className="border rounded px-4 py-2"
-          required
-        />
+        <div className={link ? 'opacity-50 pointer-events-none' : ''}>
+          <input
+            type="text"
+            placeholder="Adresse IP du poste distant"
+            value={ip}
+            onChange={e => setIp(e.target.value)}
+            className="border rounded px-4 py-2 mb-2"
+            required={!link}
+            disabled={!!link}
+          />
+          <input
+            type="password"
+            placeholder="Mot de passe VNC"
+            value={password}
+            onChange={e => setPassword(e.target.value)}
+            className="border rounded px-4 py-2"
+            required={!link}
+            disabled={!!link}
+          />
+        </div>
         <button
           type="submit"
           className="px-6 py-3 bg-green-600 text-white rounded-lg text-lg hover:bg-green-700 transition"
