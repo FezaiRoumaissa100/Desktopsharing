@@ -76,16 +76,17 @@ def start_novnc():
     # Exécute la commande système pour lancer noVNC avec SSL/TLS
     try:
         subprocess.Popen([
-    'websockify',
-    '--cert=cert.pem',
-    '--key=key.pem',
-    '8085',
-    f'{ip}:5900'
-])
+            'websockify',
+            '--cert=cert.pem',
+            '--key=key.pem',
+            '8085',
+            f'{ip}:5900'
+        ])
     except Exception as e:
         return jsonify({'error': f'Erreur démarrage noVNC : {e}'}), 500
     host_ip = request.host.split(':')[0]
-    url = f'wss://{host_ip}:8085'
+    # Redirige vers l'interface web noVNC servie par Next.js (port 3000)
+    url = f'http://{host_ip}:3000/novnc/vnc.html?host={host_ip}&port=8085&encrypt=1'
     return jsonify({'url': url})
 
 if __name__ == '__main__':
