@@ -1,11 +1,9 @@
-import { Header } from "@/components/header"
-import { Footer } from "@/components/footer"
 import { Check } from "lucide-react"
+import { Footer } from "@/components/footer"
 
 export default function FeaturesPage() {
   return (
     <div className="flex flex-col min-h-screen">
-      <Header />
       <main className="flex-1">
         <section className="py-20 md:py-28 bg-gradient-to-br from-green-50 to-green-200 dark:from-green-950 dark:to-green-900">
           <div className="container px-4 md:px-6">
@@ -15,7 +13,7 @@ export default function FeaturesPage() {
                   <span className="text-green-600 dark:text-green-400">Powerful Features</span> for Remote Access
                 </h1>
                 <p className="max-w-[700px] text-green-800 dark:text-green-200 md:text-xl/relaxed lg:text-base/relaxed xl:text-xl/relaxed">
-                  Discover all the capabilities of our browser-based remote access solution
+                  Discover the essential features of VNCConnect: secure, browser-based remote access with full control or view-only modes. Simple, direct, and safe connections from any device.
                 </p>
               </div>
             </div>
@@ -53,48 +51,6 @@ export default function FeaturesPage() {
                         <span className="font-medium">Cross-Platform</span>
                         <p className="text-sm text-muted-foreground">
                           Works on Windows, macOS, Linux, iOS, and Android - any device with a modern browser.
-                        </p>
-                      </div>
-                    </li>
-                    <li className="flex items-start gap-2">
-                      <Check className="h-5 w-5 text-primary mt-0.5" />
-                      <div>
-                        <span className="font-medium">Multi-Monitor Support</span>
-                        <p className="text-sm text-muted-foreground">
-                          Seamlessly navigate between multiple screens on the remote device.
-                        </p>
-                      </div>
-                    </li>
-                  </ul>
-                </div>
-
-                <div className="space-y-4">
-                  <h2 className="text-2xl font-bold">Collaboration Features</h2>
-                  <ul className="space-y-2">
-                    <li className="flex items-start gap-2">
-                      <Check className="h-5 w-5 text-primary mt-0.5" />
-                      <div>
-                        <span className="font-medium">Real-Time Chat</span>
-                        <p className="text-sm text-muted-foreground">
-                          Communicate with the remote user during your session with integrated chat.
-                        </p>
-                      </div>
-                    </li>
-                    <li className="flex items-start gap-2">
-                      <Check className="h-5 w-5 text-primary mt-0.5" />
-                      <div>
-                        <span className="font-medium">File Transfer</span>
-                        <p className="text-sm text-muted-foreground">
-                          Securely transfer files between devices during remote sessions.
-                        </p>
-                      </div>
-                    </li>
-                    <li className="flex items-start gap-2">
-                      <Check className="h-5 w-5 text-primary mt-0.5" />
-                      <div>
-                        <span className="font-medium">Whiteboard</span>
-                        <p className="text-sm text-muted-foreground">
-                          Draw and annotate on the screen to highlight important information.
                         </p>
                       </div>
                     </li>
@@ -139,39 +95,6 @@ export default function FeaturesPage() {
                         <span className="font-medium">View-Only Mode</span>
                         <p className="text-sm text-muted-foreground">
                           Allow remote viewing without giving control of keyboard and mouse.
-                        </p>
-                      </div>
-                    </li>
-                  </ul>
-                </div>
-
-                <div className="space-y-4">
-                  <h2 className="text-2xl font-bold">Advanced Features</h2>
-                  <ul className="space-y-2">
-                    <li className="flex items-start gap-2">
-                      <Check className="h-5 w-5 text-primary mt-0.5" />
-                      <div>
-                        <span className="font-medium">Clipboard Synchronization</span>
-                        <p className="text-sm text-muted-foreground">
-                          Copy and paste text and images between local and remote devices.
-                        </p>
-                      </div>
-                    </li>
-                    <li className="flex items-start gap-2">
-                      <Check className="h-5 w-5 text-primary mt-0.5" />
-                      <div>
-                        <span className="font-medium">Audio Streaming</span>
-                        <p className="text-sm text-muted-foreground">
-                          Hear audio from the remote device during your session.
-                        </p>
-                      </div>
-                    </li>
-                    <li className="flex items-start gap-2">
-                      <Check className="h-5 w-5 text-primary mt-0.5" />
-                      <div>
-                        <span className="font-medium">Mobile Touch Controls</span>
-                        <p className="text-sm text-muted-foreground">
-                          Optimized controls for touchscreen devices when accessing remote computers.
                         </p>
                       </div>
                     </li>

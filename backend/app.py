@@ -9,28 +9,54 @@ import os
 app = Flask(__name__)
 CORS(app)
 
+def get_local_ip():
+    try:
+        result = subprocess.run(['ipconfig'], capture_output=True, text=True, check=True)
+        output = result.stdout
+        wifi_section = None
+        for section in re.split(r'\r?\n\r?\n', output):
+            if ("Wireless LAN adapter Wi-Fi" in section) or ("Carte réseau sans fil Wi-Fi" in section):
+                wifi_section = section
+                break
+        if not wifi_section:
+            return "Not found"
+        match = re.search(r'IPv4 Address[. ]*: ([0-9.]+)', wifi_section)
+        if not match:
+            match = re.search(r'Adresse IPv4[. ]*: ([0-9.]+)', wifi_section)
+        if match:
+            return match.group(1)
+        else:
+            return "Not found"
+    except Exception as e:
+        return f"Error: {e}"
 
 def generate_password(length=8):
     chars = string.ascii_letters + string.digits
     return ''.join(random.choice(chars) for _ in range(length))
 
-
-def get_local_ip():
-    s = socket.socket(socket.AF_INET, socket.SOCK_DGRAM)
+def get_all_local_ips():
+    ips = set()
+    hostname = socket.gethostname()
     try:
-        s.connect(('10.255.255.255', 1))
-        IP = s.getsockname()[0]
+        for ip in socket.gethostbyname_ex(hostname)[2]:
+            if not ip.startswith("127."):
+                ips.add(ip)
     except Exception:
-        IP = '127.0.0.1'
-    finally:
-        s.close()
-    return IP
-
+        pass
+    try:
+        for info in socket.getaddrinfo(hostname, None):
+            ip = info[4][0]
+            if "." in ip and not ip.startswith("127."):
+                ips.add(ip)
+    except Exception:
+        pass
+    return list(ips)
 
 @app.route('/api/start-share', methods=['POST'])
 def start_share():
     password = generate_password()
-    ip = get_local_ip()
+    ips = get_all_local_ips()
+    ip = ips[0] if ips else '127.0.0.1'
     # Démarrer TightVNC (le mot de passe ne sera pas appliqué)
     try:
         subprocess.Popen([
@@ -39,8 +65,7 @@ def start_share():
         ])
     except Exception as e:
         print(f"Erreur lors du démarrage de TightVNC : {e}")
-    return jsonify({'ip': ip, 'password': password})
-
+    return jsonify({'ip': ip, 'ips': ips, 'password': password})
 
 @app.route('/api/start-novnc', methods=['POST'])
 def start_novnc():
@@ -48,14 +73,11 @@ def start_novnc():
     ip = data.get('ip')
     if not ip:
         return jsonify({'error': 'IP manquante'}), 400
-    try:
-        subprocess.Popen(['novnc', '--target', f'{ip}:5900', '--listen', 'localhost:8085'])
-    except Exception as e:
-        return jsonify({'error': f'Erreur démarrage noVNC : {e}'}), 500
+    # Exécute la commande système pour lancer noVNC
+    subprocess.Popen(['novnc', '--target', f'{ip}:5900', '--listen', 'localhost:8085'])
     host_ip = request.host.split(':')[0]
     url = f'http://{host_ip}:8085'
     return jsonify({'url': url})
 
-
 if __name__ == '__main__':
-    app.run(host='0.0.0.0', port=5000)
+    app.run(host='0.0.0.0', port=5000) 

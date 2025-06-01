@@ -6,7 +6,7 @@ export function Footer() {
     <footer className="bg-background border-t border-border py-8 mt-auto">
       <div className="container mx-auto px-4 flex flex-col md:flex-row justify-between items-center">
         <div className="flex items-center space-x-2 mb-4 md:mb-0">
-          <span className="text-xl font-bold text-green-600 dark:text-green-400">VNC Web</span>
+          <span className="text-xl font-bold text-green-600 dark:text-green-400">VNCConnect</span>
         </div>
         <div className="flex space-x-6">
           <div className="space-y-4">

@@ -1,4 +1,4 @@
-import { Monitor, Laptop, Lock } from "lucide-react"
+import { Monitor, Lock } from "lucide-react"
 
 export function HowItWorksSection() {
   return (
@@ -10,11 +10,11 @@ export function HowItWorksSection() {
               <span className="text-green-600">How It Works</span>
             </h2>
             <p className="max-w-[700px] text-green-800 md:text-xl/relaxed lg:text-base/relaxed xl:text-xl/relaxed">
-              Connect to any device in three simple steps
+              Connect in two simple steps: share your secure connection details, then connect from another device.
             </p>
           </div>
         </div>
-        <div className="mx-auto grid max-w-5xl grid-cols-1 gap-8 py-12 md:grid-cols-3">
+        <div className="mx-auto grid max-w-3xl grid-cols-1 gap-8 py-12 md:grid-cols-2">
           <div className="flex flex-col items-center space-y-4 rounded-lg border border-green-200 bg-white p-6 shadow-sm">
             <div className="flex h-12 w-12 items-center justify-center rounded-full bg-green-600 text-xl font-bold text-white">
               1
@@ -22,9 +22,9 @@ export function HowItWorksSection() {
             <div className="p-3 rounded-full bg-green-100">
               <Monitor className="h-8 w-8 text-green-600" />
             </div>
-            <h3 className="text-xl font-bold text-green-700">Generate Access Code</h3>
+            <h3 className="text-xl font-bold text-green-700">Share Your Connection Details</h3>
             <p className="text-center text-green-800">
-              On the device you want to control, visit our website and generate a unique access code
+              On the device to be controlled, click "Share my screen" to generate your secure connection credentials. Communicate these details to the person who will connect.
             </p>
           </div>
           <div className="flex flex-col items-center space-y-4 rounded-lg border border-green-200 bg-white p-6 shadow-sm">
@@ -32,31 +32,18 @@ export function HowItWorksSection() {
               2
             </div>
             <div className="p-3 rounded-full bg-green-100">
-              <Laptop className="h-8 w-8 text-green-600" />
-            </div>
-            <h3 className="text-xl font-bold text-green-700">Enter Code on Controller</h3>
-            <p className="text-center text-green-800">
-              On your controlling device, enter the access code to establish a connection
-            </p>
-          </div>
-          <div className="flex flex-col items-center space-y-4 rounded-lg border border-green-200 bg-white p-6 shadow-sm">
-            <div className="flex h-12 w-12 items-center justify-center rounded-full bg-green-600 text-xl font-bold text-white">
-              3
-            </div>
-            <div className="p-3 rounded-full bg-green-100">
               <Lock className="h-8 w-8 text-green-600" />
             </div>
-            <h3 className="text-xl font-bold text-green-700">Secure Connection Established</h3>
+            <h3 className="text-xl font-bold text-green-700">Connect Remotely</h3>
             <p className="text-center text-green-800">
-              An encrypted peer-to-peer connection is established, allowing secure remote control
+              On the controlling device, click "Access a screen" and enter the connection details to start the remote session securely in your browser.
             </p>
           </div>
         </div>
         <div className="flex justify-center mt-8">
           <div className="max-w-3xl text-center">
             <p className="text-green-800">
-              Our technology uses WebRTC with end-to-end encryption to create a direct connection between devices. Your
-              data never passes through our servers, ensuring maximum privacy and security.
+              VNCConnect makes remote access simple: no code, no chat, just share your secure connection credentials for instant connection. All sessions are secured and run directly in your browser.
             </p>
           </div>
         </div>
