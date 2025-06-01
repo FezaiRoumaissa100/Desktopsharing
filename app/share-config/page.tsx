@@ -22,10 +22,14 @@ export default function ShareConfig() {
     }
   }
 
-  const handleCopy = (value: string, field: 'ip' | 'password') => {
-    navigator.clipboard.writeText(value)
-    setCopied({ ...copied, [field]: true })
-    setTimeout(() => setCopied({ ...copied, [field]: false }), 1500)
+  const handleCopy = async (value: string, field: 'ip' | 'password') => {
+    try {
+      await navigator.clipboard.writeText(value)
+      setCopied({ ...copied, [field]: true })
+      setTimeout(() => setCopied({ ...copied, [field]: false }), 1500)
+    } catch (e) {
+      setError("Erreur lors de la copie dans le presse-papier. Autorisez l'accès au presse-papier dans votre navigateur.")
+    }
   }
 
   return (
