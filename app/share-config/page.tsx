@@ -1,5 +1,5 @@
 "use client"
-import { useState } from "react"
+import { useState, useEffect } from "react"
 
 export default function ShareConfig() {
   const [ip, setIp] = useState("")
@@ -9,12 +9,27 @@ export default function ShareConfig() {
   const [error, setError] = useState("")
   const [copied, setCopied] = useState(false)
 
+  useEffect(() => {
+    // Récupère automatiquement l'IP locale au chargement
+    const fetchIp = async () => {
+      try {
+        const res = await fetch("http://localhost:5000/api/start-share", { method: "POST" })
+        if (!res.ok) throw new Error("Erreur lors de la récupération de l'IP")
+        const data = await res.json()
+        setIp(data.ip)
+      } catch (e: any) {
+        setError(e.message)
+      }
+    }
+    fetchIp()
+  }, [])
+
   const handleGenerateLink = async () => {
     setLoading(true)
     setError("")
     setLink("")
     try {
-      if (!ip) throw new Error("Veuillez saisir l'adresse IP")
+      if (!ip) throw new Error("Impossible de récupérer l'adresse IP")
       const res = await fetch("http://localhost:5000/api/generate-link", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
@@ -43,13 +58,7 @@ export default function ShareConfig() {
   return (
     <div className="flex flex-col items-center justify-center min-h-screen gap-6 bg-gradient-to-br from-green-50 to-green-100">
       <h2 className="text-2xl font-bold text-green-800">Partager mon écran</h2>
-      <input
-        type="text"
-        placeholder="Adresse IP de ce poste"
-        value={ip}
-        onChange={e => setIp(e.target.value)}
-        className="border rounded px-4 py-2 w-80"
-      />
+      <div className="mb-2 text-green-900">Adresse IP détectée : <span className="font-mono bg-green-100 px-2 py-1 rounded">{ip || '...'}</span></div>
       <div className="flex gap-4">
         <label className="flex items-center gap-2">
           <input type="radio" name="mode" value="0" checked={mode === "0"} onChange={() => setMode("0")}/>
