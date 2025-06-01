@@ -1,4 +1,3 @@
-import { Header } from "@/components/header"
 import { Footer } from "@/components/footer"
 import Link from "next/link"
 import { Button } from "@/components/ui/button"
@@ -11,7 +10,6 @@ import { Mail, MessageSquare, FileText, HelpCircle } from "lucide-react"
 export default function SupportPage() {
   return (
     <div className="flex flex-col min-h-screen">
-      <Header />
       <main className="flex-1 bg-background text-foreground">
         <section className="py-20 md:py-28 bg-hero-gradient">
           <div className="container px-4 md:px-6">
@@ -152,38 +150,22 @@ export default function SupportPage() {
                   </CardContent>
                 </Card>
 
-                <div className="grid gap-6 md:grid-cols-2">
-                  <Card>
-                    <CardHeader>
-                      <CardTitle className="flex items-center gap-2">
-                        <Mail className="h-5 w-5 text-green-600" />
-                        Email Support
-                      </CardTitle>
-                    </CardHeader>
-                    <CardContent>
-                      <p className="text-sm text-green-800">
-                        For general inquiries, you can email us at{" "}
-                        <a href="mailto:support@vncconnect.com" className="text-green-600 hover:underline">
-                          support@vncconnect.com
-                        </a>
-                      </p>
-                    </CardContent>
-                  </Card>
-                  <Card>
-                    <CardHeader>
-                      <CardTitle className="flex items-center gap-2">
-                        <MessageSquare className="h-5 w-5 text-green-600" />
-                        Live Chat
-                      </CardTitle>
-                    </CardHeader>
-                    <CardContent>
-                      <p className="text-sm text-green-800 mb-4">
-                        Chat with our support team in real-time during business hours.
-                      </p>
-                      <Button className="w-full">Start Chat</Button>
-                    </CardContent>
-                  </Card>
-                </div>
+                <Card>
+                  <CardHeader>
+                    <CardTitle className="flex items-center gap-2">
+                      <Mail className="h-5 w-5 text-green-600" />
+                      Email Support
+                    </CardTitle>
+                  </CardHeader>
+                  <CardContent>
+                    <p className="text-sm text-green-800">
+                      For general inquiries, you can email us at{" "}
+                      <a href="mailto:support@vncconnect.com" className="text-green-600 hover:underline">
+                        support@vncconnect.com
+                      </a>
+                    </p>
+                  </CardContent>
+                </Card>
               </div>
             </div>
           </div>
