@@ -73,10 +73,19 @@ def start_novnc():
     ip = data.get('ip')
     if not ip:
         return jsonify({'error': 'IP manquante'}), 400
-    # Exécute la commande système pour lancer noVNC
-    subprocess.Popen(['novnc', '--target', f'{ip}:5900', '--listen', 'localhost:8085'])
+    # Exécute la commande système pour lancer noVNC avec SSL/TLS
+    try:
+        subprocess.Popen([
+    'websockify',
+    '--cert=cert.pem',
+    '--key=key.pem',
+    '8085',
+    f'{ip}:5900'
+])
+    except Exception as e:
+        return jsonify({'error': f'Erreur démarrage noVNC : {e}'}), 500
     host_ip = request.host.split(':')[0]
-    url = f'http://{host_ip}:8085'
+    url = f'wss://{host_ip}:8085'
     return jsonify({'url': url})
 
 if __name__ == '__main__':
