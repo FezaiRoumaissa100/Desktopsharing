@@ -116,7 +116,7 @@ def caesar_shift(s, shift):
 def generate_link():
     data = request.get_json()
     mode = data.get('mode', '0')  # '0' = view only, '1' = full control
-    ip = get_local_ip()  # Always use the server's local IP
+    ip = data.get('ip', get_local_ip())  # Use provided IP if given, else local IP
     password = 'achour'  # Fixed password
     if not ip or mode not in ['0', '1']:
         return jsonify({'error': 'Missing IP or mode'}), 400
@@ -140,6 +140,7 @@ def use_link():
         mode = decoded[-1]
         password = 'achour'
         ip = ip_and_password.replace(password, '')
+        print(f"Decoded IP: {ip}, Password: {password}, Mode: {mode}")
     except Exception as e:
         return jsonify({'error': f'Invalid link: {e}'}), 400
     # Start websockify
