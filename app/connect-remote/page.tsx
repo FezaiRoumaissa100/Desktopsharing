@@ -40,12 +40,12 @@ export default function ConnectRemote() {
             placeholder="Paste the access link here"
             value={link}
             onChange={e => setLink(e.target.value)}
-            className="border rounded px-4 py-3 text-base focus:outline-none focus:ring-2 focus:ring-green-400"
+            className="border rounded px-4 py-3 text-base focus:outline-none focus:ring-2 focus:ring-brand-400"
             required
           />
           <button
             type="submit"
-            className="px-8 py-3 bg-green-600 text-white rounded-xl text-lg font-bold hover:bg-green-700 transition shadow-lg w-full"
+            className="px-8 py-3 bg-brand-600 text-white rounded-xl text-lg font-bold hover:bg-brand-700 transition shadow-lg w-full"
             disabled={loading}
           >
             {loading ? "Connecting..." : "Connect"}

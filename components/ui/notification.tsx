@@ -19,9 +19,9 @@ const notificationVariants = cva(
   {
     variants: {
       type: {
-        success: "bg-green-50 dark:bg-green-900/30 border-green-200 dark:border-green-800",
+        success: "bg-brand-50 dark:bg-brand-900/30 border-brand-200 dark:border-brand-800",
         error: "bg-red-50 dark:bg-red-900/30 border-red-200 dark:border-red-800",
-        info: "bg-green-50 dark:bg-green-900/30 border-green-200 dark:border-green-800",
+        info: "bg-brand-50 dark:bg-brand-900/30 border-brand-200 dark:border-brand-800",
         warning: "bg-yellow-50 dark:bg-yellow-900/30 border-yellow-200 dark:border-yellow-800",
       },
       position: {
@@ -39,9 +39,9 @@ const notificationVariants = cva(
 )
 
 const iconVariants = {
-  success: <CheckCircle className="h-5 w-5 text-green-500 dark:text-green-400" />,
+  success: <CheckCircle className="h-5 w-5 text-brand-500 dark:text-brand-400" />,
   error: <AlertCircle className="h-5 w-5 text-red-500 dark:text-red-400" />,
-  info: <Info className="h-5 w-5 text-green-500 dark:text-green-400" />,
+  info: <Info className="h-5 w-5 text-brand-500 dark:text-brand-400" />,
   warning: <AlertTriangle className="h-5 w-5 text-yellow-500 dark:text-yellow-400" />,
 }
 

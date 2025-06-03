@@ -3,7 +3,6 @@
 import { useState } from "react"
 import { Button } from "@/components/ui/button"
 import { Whiteboard } from "@/components/whiteboard"
-import { Header } from "@/components/header"
 import { Footer } from "@/components/footer"
 
 export default function WhiteboardTestPage() {
@@ -12,8 +11,7 @@ export default function WhiteboardTestPage() {
 
   return (
     <div className="flex flex-col min-h-screen">
-      <Header />
-      <main className="flex-1 py-8 container">
+      <main className="flex-1 bg-background text-foreground">
         <div className="flex flex-col items-center justify-center space-y-4 text-center mb-8">
           <h1 className="text-3xl font-bold tracking-tighter sm:text-4xl md:text-5xl">Whiteboard Test</h1>
           <p className="max-w-[700px] text-muted-foreground md:text-xl/relaxed lg:text-base/relaxed xl:text-xl/relaxed">

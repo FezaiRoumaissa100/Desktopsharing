@@ -29,13 +29,13 @@ export function Header() {
         <div className="flex justify-between items-center h-16">
           <div className="flex items-center">
             <Link href="/" className="flex items-center" onClick={closeMenu}>
-              <span className="text-xl font-bold text-green-600 dark:text-green-400">VNCConnect</span>
+              <span className="text-xl font-bold text-brand-600 dark:text-brand-400">VNCConnect</span>
             </Link>
             <nav className="hidden md:flex ml-8 space-x-6">
               <Link
                 href="/"
                 className={`text-sm ${
-                  isActive("/") ? "text-green-600 dark:text-green-400 font-medium" : "text-foreground hover:text-green-600 dark:hover:text-green-400"
+                  isActive("/") ? "text-brand-600 dark:text-brand-400 font-medium" : "text-foreground hover:text-brand-600 dark:hover:text-brand-400"
                 }`}
                 onClick={closeMenu}
               >
@@ -44,7 +44,7 @@ export function Header() {
               <Link
                 href="/features"
                 className={`text-sm ${
-                  isActive("/features") ? "text-green-600 dark:text-green-400 font-medium" : "text-foreground hover:text-green-600 dark:hover:text-green-400"
+                  isActive("/features") ? "text-brand-600 dark:text-brand-400 font-medium" : "text-foreground hover:text-brand-600 dark:hover:text-brand-400"
                 }`}
                 onClick={closeMenu}
               >
@@ -53,7 +53,7 @@ export function Header() {
               <Link
                 href="/how-it-works"
                 className={`text-sm ${
-                  isActive("/how-it-works") ? "text-green-600 dark:text-green-400 font-medium" : "text-foreground hover:text-green-600 dark:hover:text-green-400"
+                  isActive("/how-it-works") ? "text-brand-600 dark:text-brand-400 font-medium" : "text-foreground hover:text-brand-600 dark:hover:text-brand-400"
                 }`}
                 onClick={closeMenu}
               >
@@ -62,7 +62,7 @@ export function Header() {
               <Link
                 href="/support"
                 className={`text-sm ${
-                  isActive("/support") ? "text-green-600 dark:text-green-400 font-medium" : "text-foreground hover:text-green-600 dark:hover:text-green-400"
+                  isActive("/support") ? "text-brand-600 dark:text-brand-400 font-medium" : "text-foreground hover:text-brand-600 dark:hover:text-brand-400"
                 }`}
                 onClick={closeMenu}
               >
@@ -78,17 +78,17 @@ export function Header() {
               <div className="relative">
                 <button onClick={toggleMenu} className="flex items-center text-sm focus:outline-none">
                   <span className="mr-2 hidden sm:inline-block">{user?.name}</span>
-                  <div className="w-8 h-8 rounded-full bg-green-600 dark:bg-green-400 text-white flex items-center justify-center">
+                  <div className="w-8 h-8 rounded-full bg-brand-600 dark:bg-brand-400 text-white flex items-center justify-center">
                     {user?.name?.charAt(0) || "U"}
                   </div>
                 </button>
 
                 {isMenuOpen && (
                   <div className="absolute right-0 mt-2 w-48 bg-background rounded-md shadow-lg py-1 z-10 border border-border">
-                    <Link href="/dashboard" className="block px-4 py-2 text-sm hover:bg-green-50 dark:hover:bg-green-900" onClick={closeMenu}>
+                    <Link href="/dashboard" className="block px-4 py-2 text-sm hover:bg-brand-50 dark:hover:bg-brand-900" onClick={closeMenu}>
                       Dashboard
                     </Link>
-                    <Link href="/profile" className="block px-4 py-2 text-sm hover:bg-green-50 dark:hover:bg-green-900" onClick={closeMenu}>
+                    <Link href="/profile" className="block px-4 py-2 text-sm hover:bg-brand-50 dark:hover:bg-brand-900" onClick={closeMenu}>
                       Profile
                     </Link>
                     <button
@@ -96,7 +96,7 @@ export function Header() {
                         logout()
                         closeMenu()
                       }}
-                      className="block w-full text-left px-4 py-2 text-sm hover:bg-green-50 dark:hover:bg-green-900"
+                      className="block w-full text-left px-4 py-2 text-sm hover:bg-brand-50 dark:hover:bg-brand-900"
                     >
                       Logout
                     </button>
@@ -105,12 +105,12 @@ export function Header() {
               </div>
             ) : (
               <div className="flex items-center space-x-2">
-                <Link href="/login" className="px-4 py-2 text-sm rounded-md hover:bg-green-50 dark:hover:bg-green-900" onClick={closeMenu}>
+                <Link href="/login" className="px-4 py-2 text-sm rounded-md hover:bg-brand-50 dark:hover:bg-brand-900/20" onClick={closeMenu}>
                   Login
                 </Link>
                 <Link
                   href="/signup"
-                  className="px-4 py-2 text-sm bg-green-600 dark:bg-green-400 text-white rounded-md hover:bg-green-700 dark:hover:bg-green-500"
+                  className="px-4 py-2 text-sm bg-brand-600 dark:bg-brand-400 text-white rounded-md hover:bg-brand-700 dark:hover:bg-brand-500"
                   onClick={closeMenu}
                 >
                   Sign Up
@@ -127,7 +127,7 @@ export function Header() {
           <Link
             href="/"
             className={`block px-3 py-2 rounded-md text-base ${
-              isActive("/") ? "bg-green-100 dark:bg-green-900 text-green-600 dark:text-green-400 font-medium" : "hover:bg-green-50 dark:hover:bg-green-900"
+              isActive("/") ? "bg-brand-100 dark:bg-brand-900/20 text-brand-600 dark:text-brand-400 font-medium" : "hover:bg-brand-50 dark:hover:bg-brand-900/20"
             }`}
             onClick={closeMenu}
           >
@@ -136,7 +136,7 @@ export function Header() {
           <Link
             href="/features"
             className={`block px-3 py-2 rounded-md text-base ${
-              isActive("/features") ? "bg-green-100 dark:bg-green-900 text-green-600 dark:text-green-400 font-medium" : "hover:bg-green-50 dark:hover:bg-green-900"
+              isActive("/features") ? "bg-brand-100 dark:bg-brand-900/20 text-brand-600 dark:text-brand-400 font-medium" : "hover:bg-brand-50 dark:hover:bg-brand-900/20"
             }`}
             onClick={closeMenu}
           >
@@ -145,7 +145,7 @@ export function Header() {
           <Link
             href="/how-it-works"
             className={`block px-3 py-2 rounded-md text-base ${
-              isActive("/how-it-works") ? "bg-green-100 dark:bg-green-900 text-green-600 dark:text-green-400 font-medium" : "hover:bg-green-50 dark:hover:bg-green-900"
+              isActive("/how-it-works") ? "bg-brand-100 dark:bg-brand-900/20 text-brand-600 dark:text-brand-400 font-medium" : "hover:bg-brand-50 dark:hover:bg-brand-900/20"
             }`}
             onClick={closeMenu}
           >
@@ -154,7 +154,7 @@ export function Header() {
           <Link
             href="/support"
             className={`block px-3 py-2 rounded-md text-base ${
-              isActive("/support") ? "bg-green-100 dark:bg-green-900 text-green-600 dark:text-green-400 font-medium" : "hover:bg-green-50 dark:hover:bg-green-900"
+              isActive("/support") ? "bg-brand-100 dark:bg-brand-900/20 text-brand-600 dark:text-brand-400 font-medium" : "hover:bg-brand-50 dark:hover:bg-brand-900/20"
             }`}
             onClick={closeMenu}
           >
@@ -166,7 +166,7 @@ export function Header() {
               <Link
                 href="/dashboard"
                 className={`block px-3 py-2 rounded-md text-base ${
-                  isActive("/dashboard") ? "bg-green-100 dark:bg-green-900 text-green-600 dark:text-green-400 font-medium" : "hover:bg-green-50 dark:hover:bg-green-900"
+                  isActive("/dashboard") ? "bg-brand-100 dark:bg-brand-900/20 text-brand-600 dark:text-brand-400 font-medium" : "hover:bg-brand-50 dark:hover:bg-brand-900/20"
                 }`}
                 onClick={closeMenu}
               >
@@ -175,7 +175,7 @@ export function Header() {
               <Link
                 href="/profile"
                 className={`block px-3 py-2 rounded-md text-base ${
-                  isActive("/profile") ? "bg-green-100 dark:bg-green-900 text-green-600 dark:text-green-400 font-medium" : "hover:bg-green-50 dark:hover:bg-green-900"
+                  isActive("/profile") ? "bg-brand-100 dark:bg-brand-900/20 text-brand-600 dark:text-brand-400 font-medium" : "hover:bg-brand-50 dark:hover:bg-brand-900/20"
                 }`}
                 onClick={closeMenu}
               >
@@ -186,7 +186,7 @@ export function Header() {
                   logout()
                   closeMenu()
                 }}
-                className="block w-full text-left px-3 py-2 rounded-md text-base hover:bg-green-50 dark:hover:bg-green-900"
+                className="block w-full text-left px-3 py-2 rounded-md text-base hover:bg-brand-50 dark:hover:bg-brand-900/20"
               >
                 Logout
               </button>

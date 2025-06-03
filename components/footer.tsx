@@ -1,5 +1,11 @@
 import Link from "next/link"
 import { Facebook, Github, Twitter } from "lucide-react"
+import {
+  Tooltip,
+  TooltipContent,
+  TooltipProvider,
+  TooltipTrigger,
+} from "@/components/ui/tooltip"
 
 export function Footer() {
   return (
@@ -13,22 +19,22 @@ export function Footer() {
             <h3 className="text-xl font-semibold text-white">Resources</h3>
             <ul className="space-y-2 text-sm">
               <li>
-                <Link href="/features" className="hover:text-green-400 transition-colors">
+                <Link href="/features" className="hover:text-brand-400 transition-colors">
                   Features
                 </Link>
               </li>
               <li>
-                <Link href="/how-it-works" className="hover:text-green-400 transition-colors">
+                <Link href="/how-it-works" className="hover:text-brand-400 transition-colors">
                   How It Works
                 </Link>
               </li>
               <li>
-                <Link href="/support" className="hover:text-green-400 transition-colors">
+                <Link href="/support" className="hover:text-brand-400 transition-colors">
                   Support
                 </Link>
               </li>
               <li>
-                <Link href="/security" className="hover:text-green-400 transition-colors">
+                <Link href="/security" className="hover:text-brand-400 transition-colors">
                   Security
                 </Link>
               </li>
@@ -38,22 +44,22 @@ export function Footer() {
             <h3 className="text-xl font-semibold text-white">Company</h3>
             <ul className="space-y-2 text-sm">
               <li>
-                <Link href="/about" className="hover:text-green-400 transition-colors">
+                <Link href="/about" className="hover:text-brand-400 transition-colors">
                   About Us
                 </Link>
               </li>
               <li>
-                <Link href="/contact" className="hover:text-green-400 transition-colors">
+                <Link href="/contact" className="hover:text-brand-400 transition-colors">
                   Contact
                 </Link>
               </li>
               <li>
-                <Link href="/privacy" className="hover:text-green-400 transition-colors">
+                <Link href="/privacy" className="hover:text-brand-400 transition-colors">
                   Privacy Policy
                 </Link>
               </li>
               <li>
-                <Link href="/terms" className="hover:text-green-400 transition-colors">
+                <Link href="/terms" className="hover:text-brand-400 transition-colors">
                   Terms of Service
                 </Link>
               </li>
@@ -61,15 +67,44 @@ export function Footer() {
           </div>
         </div>
         <div className="flex items-center space-x-6 mt-6 md:mt-0">
-          <Link href="#" className="text-gray-400 hover:text-white transition-colors">
-            <Facebook className="h-6 w-6" />
-          </Link>
-          <Link href="#" className="text-gray-400 hover:text-white transition-colors">
-            <Twitter className="h-6 w-6" />
-          </Link>
-          <Link href="#" className="text-gray-400 hover:text-white transition-colors">
-            <Github className="h-6 w-6" />
-          </Link>
+          <TooltipProvider>
+            <Tooltip>
+              <TooltipTrigger asChild>
+                <Link href="https://facebook.com/vncconnect" target="_blank" rel="noopener noreferrer" className="text-gray-400 hover:text-white transition-colors">
+                  <Facebook className="h-6 w-6" />
+                </Link>
+              </TooltipTrigger>
+              <TooltipContent>
+                <p>Follow us on Facebook</p>
+              </TooltipContent>
+            </Tooltip>
+          </TooltipProvider>
+
+          <TooltipProvider>
+            <Tooltip>
+              <TooltipTrigger asChild>
+                <Link href="https://twitter.com/vncconnect" target="_blank" rel="noopener noreferrer" className="text-gray-400 hover:text-white transition-colors">
+                  <Twitter className="h-6 w-6" />
+                </Link>
+              </TooltipTrigger>
+              <TooltipContent>
+                <p>Follow us on Twitter</p>
+              </TooltipContent>
+            </Tooltip>
+          </TooltipProvider>
+
+          <TooltipProvider>
+            <Tooltip>
+              <TooltipTrigger asChild>
+                <Link href="https://github.com/vncconnect" target="_blank" rel="noopener noreferrer" className="text-gray-400 hover:text-white transition-colors">
+                  <Github className="h-6 w-6" />
+                </Link>
+              </TooltipTrigger>
+              <TooltipContent>
+                <p>View our GitHub</p>
+              </TooltipContent>
+            </Tooltip>
+          </TooltipProvider>
         </div>
       </div>
       <div className="container mx-auto px-4 mt-8 pt-8 border-t border-gray-700 text-center text-sm text-gray-500">
