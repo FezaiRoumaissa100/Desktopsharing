@@ -70,7 +70,7 @@ export function Footer() {
           <TooltipProvider>
             <Tooltip>
               <TooltipTrigger asChild>
-                <Link href="https://facebook.com/vncconnect" target="_blank" rel="noopener noreferrer" className="text-gray-400 hover:text-white transition-colors">
+                <Link href="https://www.facebook.com/profile.php?id=61576682567687" target="_blank" rel="noopener noreferrer" className="text-gray-400 hover:text-white transition-colors">
                   <Facebook className="h-6 w-6" />
                 </Link>
               </TooltipTrigger>
