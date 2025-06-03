@@ -1,42 +1,30 @@
 from flask import Flask, request, jsonify
 from flask_cors import CORS
-import subprocess
 import socket
 import random
 import string
-import os
-import re
+import subprocess
 
 app = Flask(__name__)
 CORS(app)
 
+# Clean cross-platform Wi-Fi/local IP detection
 def get_local_ip():
     try:
-        result = subprocess.run(['ipconfig'], capture_output=True, text=True, check=True)
-        output = result.stdout
-        wifi_section = None
-        for section in re.split(r'\r?\n\r?\n', output):
-            if ("Wireless LAN adapter Wi-Fi" in section) or ("Carte réseau sans fil Wi-Fi" in section):
-                wifi_section = section
-                break
-        if wifi_section:
-            match = re.search(r'IPv4 Address[. ]*: ([0-9.]+)', wifi_section)
-            if not match:
-                match = re.search(r'Adresse IPv4[. ]*: ([0-9.]+)', wifi_section)
-            if match:
-                return match.group(1)
-        # Fallback: use socket to get local IP
         s = socket.socket(socket.AF_INET, socket.SOCK_DGRAM)
-        try:
-            s.connect(("8.8.8.8", 80))
-            ip = s.getsockname()[0]
-        except Exception:
-            ip = "127.0.0.1"
-        finally:
-            s.close()
+        s.connect(("8.8.8.8", 80))
+        ip = s.getsockname()[0]
+        s.close()
+        print(f"Detected local IP: {ip}")
         return ip
-    except Exception as e:
+    except Exception:
         return "127.0.0.1"
+
+
+@app.route('/api/get-ip', methods=['GET'])
+def get_ip():
+    ip = get_local_ip()
+    return jsonify({'ip': ip})
 
 def generate_password(length=8):
     chars = string.ascii_letters + string.digits
@@ -65,7 +53,6 @@ def start_share():
     password = generate_password()
     ips = get_all_local_ips()
     ip = ips[0] if ips else '127.0.0.1'
-    # Start TightVNC (the password will not be applied)
     try:
         subprocess.Popen([
             r"C:\Program Files\TightVNC\tvnserver.exe",
@@ -82,7 +69,6 @@ def start_novnc():
     password = data.get('password')
     if not ip or not password:
         return jsonify({'error': 'Missing IP or password'}), 400
-    # Run the system command to start noVNC with SSL/TLS
     try:
         subprocess.Popen([
             'websockify',
@@ -94,11 +80,8 @@ def start_novnc():
     except Exception as e:
         return jsonify({'error': f'Error starting noVNC: {e}'}), 500
     host_ip = request.host.split(':')[0]
-    # Redirect to the noVNC web interface served by Next.js (port 3000) with password and autoconnect
     url = f'http://{host_ip}:3000/novnc/vnc.html?host={host_ip}&port=8085&encrypt=1&path=/&password={password}&autoconnect=1'
     return jsonify({'url': url})
-
-# Caesar shift function
 
 def caesar_shift(s, shift):
     result = []
@@ -116,11 +99,12 @@ def caesar_shift(s, shift):
 def generate_link():
     data = request.get_json()
     mode = data.get('mode', '0')  # '0' = view only, '1' = full control
-    ip = data.get('ip', get_local_ip())  # Use provided IP if given, else local IP
-    password = 'achour'  # Fixed password
+    ip = get_local_ip()
+    print(f"Generated link for IP: {ip}, Mode: {mode}")
+    password = "achour"
     if not ip or mode not in ['0', '1']:
         return jsonify({'error': 'Missing IP or mode'}), 400
-    raw = f'{ip}{password}{mode}'  # Concatenate without separator
+    raw = f'{ip}{password}{mode}'
     link = caesar_shift(raw, 3)
     return jsonify({'link': link})
 
@@ -132,18 +116,12 @@ def use_link():
         return jsonify({'error': 'Missing link'}), 400
     try:
         decoded = caesar_shift(link, -3)
-        # Extract ip, password, mode from the concatenated string
-        # IP is always 4 numbers separated by 3 dots (e.g., 192.168.1.17)
-        # Password is always 'achour' (6 chars), mode is 1 char
-        # So: ip = decoded[:-7], password = decoded[-7:-1], mode = decoded[-1]
-        ip_and_password = decoded[:-1]
         mode = decoded[-1]
         password = 'achour'
-        ip = ip_and_password.replace(password, '')
-        print(f"Decoded IP: {ip}, Password: {password}, Mode: {mode}")
+        ip = decoded[:-1].replace(password, '')
+        print(ip)   
     except Exception as e:
         return jsonify({'error': f'Invalid link: {e}'}), 400
-    # Start websockify
     try:
         subprocess.Popen([
             'websockify',
@@ -160,4 +138,4 @@ def use_link():
     return jsonify({'url': url})
 
 if __name__ == '__main__':
-    app.run(host='0.0.0.0', port=5000) 
+    app.run(host='0.0.0.0', port=5000)

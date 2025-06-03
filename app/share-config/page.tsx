@@ -11,19 +11,19 @@ export default function ShareConfig() {
   const [copied, setCopied] = useState(false)
 
   useEffect(() => {
-    // Get configuration from cookie
-    const getConfig = async () => {
-      try {
-        const res = await fetch("/api/share-config", { method: "GET" });
-        if (!res.ok) throw new Error("Error fetching configuration");
-        const data = await res.json();
-        if (data.ip) setIp(data.ip);
-      } catch (e: any) {
-        setError(e.message);
-      }
-    };
-    getConfig();
-  }, []);
+  const getConfig = async () => {
+    try {
+      const res = await fetch("http://localhost:5000/api/get-ip");
+      if (!res.ok) throw new Error("Error fetching IP from Flask");
+      const data = await res.json();
+      if (data.ip) setIp(data.ip);
+    } catch (e: any) {
+      setError(e.message);
+    }
+  };
+  getConfig();
+}, []);
+
 
   const handleGenerateLink = async () => {
     setLoading(true);

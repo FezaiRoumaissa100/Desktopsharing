@@ -8,11 +8,7 @@ export default function StartSession() {
   const [ipAddress, setIpAddress] = useState('');
   const [password, setPassword] = useState('');
 
-  useEffect(() => {
-    // Generate a dummy IP address and password for demonstration
-    setIpAddress(`192.168.1.${Math.floor(Math.random() * 255)}`);
-    setPassword(Math.random().toString(36).substring(2, 10));
-  }, []);
+  
 
   const handleShareScreen = async () => {
     try {
