@@ -33,43 +33,6 @@ def generate_password(length=8):
     chars = string.ascii_letters + string.digits
     return ''.join(random.choice(chars) for _ in range(length))
 
-def get_all_local_ips():
-    ips = set()
-    hostname = socket.gethostname()
-    try:
-        for ip in socket.gethostbyname_ex(hostname)[2]:
-            if not ip.startswith("127."):
-                ips.add(ip)
-    except Exception:
-        pass
-    try:
-        for info in socket.getaddrinfo(hostname, None):
-            ip = info[4][0]
-            if "." in ip and not ip.startswith("127."):
-                ips.add(ip)
-    except Exception:
-        pass
-    return list(ips)
-
-@app.route('/api/start-share', methods=['POST'])
-def start_share():
-    password = generate_password()
-    ips = get_all_local_ips()
-    ip = ips[0] if ips else '127.0.0.1'
-    # Start TightVNC (the password will not be applied)
-    try:
-        subprocess.Popen([
-            r"C:\Program Files\TightVNC\tvnserver.exe",
-            "-run"
-        ])
-    except Exception as e:
-        print(f"Error starting TightVNC: {e}")
-    return jsonify({'ip': ip, 'ips': ips, 'password': password})
-
-
-# Caesar shift function
-
-
 
 @app.route('/api/generate-link', methods=['POST'])
 def generate_link():
