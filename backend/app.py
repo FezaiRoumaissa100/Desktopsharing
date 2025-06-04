@@ -29,9 +29,7 @@ def get_local_ip():
 def get_ip():
     ip = get_local_ip()
     return jsonify({'ip': ip})
-def generate_password(length=8):
-    chars = string.ascii_letters + string.digits
-    return ''.join(random.choice(chars) for _ in range(length))
+
 
 
 @app.route('/api/generate-link', methods=['POST'])
