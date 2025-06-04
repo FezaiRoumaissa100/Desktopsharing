@@ -1,14 +1,28 @@
-from flask import Flask, request, jsonify
+from flask import Flask, request, jsonify, session
 from flask_cors import CORS
 import socket
 import random
 import string
 import subprocess
+import uuid
+from datetime import datetime, timedelta
 import base64
 from cryptography.fernet import Fernet
 
 app = Flask(__name__)
-CORS(app)
+CORS(app, supports_credentials=True)
+app.secret_key = ''.join(random.choice(string.ascii_letters + string.digits) for _ in range(32))
+
+# Store connection details temporarily (in production, use Redis or a proper database)
+connection_tokens = {}
+
+# Clean up expired tokens periodically
+def cleanup_expired_tokens():
+    current_time = datetime.now()
+    expired_tokens = [token for token, details in connection_tokens.items() 
+                     if current_time > details['expires_at']]
+    for token in expired_tokens:
+        del connection_tokens[token]
 
 
 fernet_key = Fernet.generate_key()
@@ -69,7 +83,63 @@ def start_share():
         print(f"Error starting TightVNC: {e}")
     return jsonify({'ip': ip, 'ips': ips, 'password': password})
 
+@app.route('/api/start-novnc', methods=['POST'])
+def start_novnc():
+    data = request.get_json()
+    ip = data.get('ip')
+    password = data.get('password')
+    if not ip or not password:
+        return jsonify({'error': 'Missing IP or password'}), 400
+    
+    try:
+        subprocess.Popen([
+            'websockify',
+            '--cert=cert.pem',
+            '--key=key.pem',
+            '8085',
+            f'{ip}:5900'
+        ])
+    except Exception as e:
+        return jsonify({'error': f'Error starting noVNC: {e}'}), 500
+    
+    # Generate a secure token and store connection details
+    token = str(uuid.uuid4())
+    connection_tokens[token] = {
+        'ip': ip,
+        'password': password,
+        'expires_at': datetime.now() + timedelta(hours=24)  # Token expires in 24 hours
+    }
+    
+    # Clean up expired tokens
+    cleanup_expired_tokens()
+    
+    host_ip = request.host.split(':')[0]
+    # Return URL with only the token
+    url = f'http://{host_ip}:3000/novnc/vnc.html?token={token}'
+    return jsonify({'url': url})
 
+
+@app.route('/api/novnc-connect/<token>', methods=['GET'])
+def get_connection_details(token):
+    # Clean up expired tokens first
+    cleanup_expired_tokens()
+    
+    # Check if token exists and is valid
+    if token not in connection_tokens:
+        return jsonify({'error': 'Invalid or expired token'}), 404
+    
+    connection = connection_tokens[token]
+    host_ip = request.host.split(':')[0]
+    
+    # Return connection details
+    return jsonify({
+        'host': host_ip,
+        'port': '8085',
+        'password': connection['password'],
+        'encrypt': '1',
+        'path': '/',
+        'autoconnect': '1'
+    })
 
 def caesar_shift(s, shift):
     result = []

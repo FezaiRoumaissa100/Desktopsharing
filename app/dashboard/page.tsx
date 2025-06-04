@@ -57,7 +57,7 @@ export default function DashboardPage() {
   return (
     <ProtectedRoute>
       <div className="flex flex-col min-h-screen">
-        {/* Move Dashboard heading inside the container and align with cards */}
+        <Header />
         <main className="flex-1 bg-background text-foreground">
           <div className="container px-4 md:px-6">
             <h1 className="text-3xl font-bold mb-8 mt-8">Dashboard</h1>
