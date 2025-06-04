@@ -39,11 +39,10 @@ def generate_link():
     data = request.get_json()
     mode = data.get('mode', '0')  # '0' = view only, '1' = full control
     ip = data.get('ip', get_local_ip())  # Use provided IP if given, else local IP
-    password = 'achour'
     if not ip or mode not in ['0', '1']:
         return jsonify({'error': 'Missing IP or mode'}), 400
 
-    raw = f'{ip},{password},{mode}'  # Now comma-separated
+    raw = f'{ip},{mode}'  # Now comma-separated
     encrypted = fernet.encrypt(raw.encode()).decode()
     return jsonify({'link': encrypted})
 
@@ -56,8 +55,8 @@ def use_link():
         return jsonify({'error': 'Missing link'}), 400
     try:
         decrypted = fernet.decrypt(link.encode()).decode()
-        ip, password, mode = decrypted.split(',')
-        print(f"Decoded IP: {ip}, Password: {password}, Mode: {mode}")
+        ip,mode = decrypted.split(',')
+        print(f"Decoded IP: {ip}, Mode: {mode}")
     except Exception as e:
         return jsonify({'error': f'Invalid link: {e}'}), 400
 
@@ -74,7 +73,7 @@ def use_link():
 
     host_ip = request.host.split(':')[0]
     view_only_param = '&view_only=1' if mode == '0' else ''
-    url = f'http://{host_ip}:3000/novnc/vnc.html?host={host_ip}&port=8085&encrypt=1&path=/&password={password}&autoconnect=1{view_only_param}'
+    url = f'http://{host_ip}:3000/novnc/vnc.html?host={host_ip}&port=8085&encrypt=1&path=/&autoconnect=1{view_only_param}'
     return jsonify({'url': url})
 
 if __name__ == '__main__':
