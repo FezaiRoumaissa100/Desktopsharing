@@ -1,12 +1,26 @@
-from flask import Flask, request, jsonify
+from flask import Flask, request, jsonify, session
 from flask_cors import CORS
 import socket
 import random
 import string
 import subprocess
+import uuid
+from datetime import datetime, timedelta
 
 app = Flask(__name__)
-CORS(app)
+CORS(app, supports_credentials=True)
+app.secret_key = ''.join(random.choice(string.ascii_letters + string.digits) for _ in range(32))
+
+# Store connection details temporarily (in production, use Redis or a proper database)
+connection_tokens = {}
+
+# Clean up expired tokens periodically
+def cleanup_expired_tokens():
+    current_time = datetime.now()
+    expired_tokens = [token for token, details in connection_tokens.items() 
+                     if current_time > details['expires_at']]
+    for token in expired_tokens:
+        del connection_tokens[token]
 
 # Clean cross-platform Wi-Fi/local IP detection
 def get_local_ip():
@@ -69,6 +83,7 @@ def start_novnc():
     password = data.get('password')
     if not ip or not password:
         return jsonify({'error': 'Missing IP or password'}), 400
+    
     try:
         subprocess.Popen([
             'websockify',
@@ -79,9 +94,44 @@ def start_novnc():
         ])
     except Exception as e:
         return jsonify({'error': f'Error starting noVNC: {e}'}), 500
+    
+    # Generate a secure token and store connection details
+    token = str(uuid.uuid4())
+    connection_tokens[token] = {
+        'ip': ip,
+        'password': password,
+        'expires_at': datetime.now() + timedelta(hours=24)  # Token expires in 24 hours
+    }
+    
+    # Clean up expired tokens
+    cleanup_expired_tokens()
+    
     host_ip = request.host.split(':')[0]
-    url = f'http://{host_ip}:3000/novnc/vnc.html?host={host_ip}&port=8085&encrypt=1&path=/&password={password}&autoconnect=1'
+    # Return URL with only the token
+    url = f'http://{host_ip}:3000/novnc/vnc.html?token={token}'
     return jsonify({'url': url})
+
+@app.route('/api/novnc-connect/<token>', methods=['GET'])
+def get_connection_details(token):
+    # Clean up expired tokens first
+    cleanup_expired_tokens()
+    
+    # Check if token exists and is valid
+    if token not in connection_tokens:
+        return jsonify({'error': 'Invalid or expired token'}), 404
+    
+    connection = connection_tokens[token]
+    host_ip = request.host.split(':')[0]
+    
+    # Return connection details
+    return jsonify({
+        'host': host_ip,
+        'port': '8085',
+        'password': connection['password'],
+        'encrypt': '1',
+        'path': '/',
+        'autoconnect': '1'
+    })
 
 def caesar_shift(s, shift):
     result = []
