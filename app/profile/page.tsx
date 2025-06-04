@@ -4,7 +4,7 @@ import type React from "react"
 import { useState, useEffect } from "react"
 import { useRouter } from "next/navigation"
 import Image from "next/image"
-import { Header } from "@/components/header"
+// Removed: import { Header } from "@/components/header"
 import { Footer } from "@/components/footer"
 import { Button } from "@/components/ui/button"
 import { Input } from "@/components/ui/input"
@@ -216,18 +216,18 @@ export default function ProfilePage() {
   return (
     <ProtectedRoute>
       <div className="flex flex-col min-h-screen">
-        <Header />
+        {/* <Header /> <-- Removed this line */}
         <main className="flex-1 bg-background text-foreground">
           <div className="container px-4 md:px-6">
-            <div className="flex items-center mb-6">
-              <Button variant="ghost" size="sm" onClick={() => router.back()} className="mr-4">
-                <ArrowLeft className="h-4 w-4 mr-2" />
-                Back
-              </Button>
-              <h1 className="text-3xl font-bold tracking-tighter">Your Profile</h1>
-            </div>
-
+            {/* Align "Your Profile" and the arrow with the rest of the content */}
             <div className="mx-auto max-w-5xl">
+              <div className="flex items-center mb-6 mt-12">
+                <Button variant="ghost" size="sm" onClick={() => router.back()} className="mr-4">
+                  <ArrowLeft className="h-4 w-4 mr-2" />
+                  Back
+                </Button>
+                <h1 className="text-3xl font-bold tracking-tighter">Your Profile</h1>
+              </div>
               <Tabs defaultValue="profile" className="w-full">
                 <TabsList className="grid w-full grid-cols-3 mb-8">
                   <TabsTrigger value="profile">

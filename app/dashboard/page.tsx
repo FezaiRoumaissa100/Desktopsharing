@@ -2,7 +2,6 @@
 
 import { useState, useEffect } from "react"
 import { useRouter } from "next/navigation"
-import { Header } from "@/components/header"
 import { Footer } from "@/components/footer"
 import { Button } from "@/components/ui/button"
 import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from "@/components/ui/card"
@@ -58,22 +57,10 @@ export default function DashboardPage() {
   return (
     <ProtectedRoute>
       <div className="flex flex-col min-h-screen">
-        <Header />
+        {/* Move Dashboard heading inside the container and align with cards */}
         <main className="flex-1 bg-background text-foreground">
           <div className="container px-4 md:px-6">
-            <div className="flex flex-col md:flex-row justify-between items-start md:items-center mb-8">
-              <div>
-                <h1 className="text-3xl font-bold">Dashboard</h1>
-                <p className="text-muted-foreground mt-1">Welcome back, {user?.name}</p>
-              </div>
-              <div className="mt-4 md:mt-0">
-                <Button onClick={() => router.push("/start-session")} className="flex items-center gap-2">
-                  <Monitor className="h-4 w-4" />
-                  Start New Connection
-                </Button>
-              </div>
-            </div>
-
+            <h1 className="text-3xl font-bold mb-8 mt-8">Dashboard</h1>
             <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-8">
               <Card>
                 <CardHeader className="pb-2">

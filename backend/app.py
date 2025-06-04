@@ -4,10 +4,17 @@ import socket
 import random
 import string
 import subprocess
+import base64
+from cryptography.fernet import Fernet
 
 app = Flask(__name__)
 CORS(app)
 
+
+fernet_key = Fernet.generate_key()
+fernet = Fernet(fernet_key)
+with open("fernet.key", "wb") as f:
+    f.write(fernet_key)
 # Clean cross-platform Wi-Fi/local IP detection
 def get_local_ip():
     try:
@@ -62,26 +69,7 @@ def start_share():
         print(f"Error starting TightVNC: {e}")
     return jsonify({'ip': ip, 'ips': ips, 'password': password})
 
-@app.route('/api/start-novnc', methods=['POST'])
-def start_novnc():
-    data = request.get_json()
-    ip = data.get('ip')
-    password = data.get('password')
-    if not ip or not password:
-        return jsonify({'error': 'Missing IP or password'}), 400
-    try:
-        subprocess.Popen([
-            'websockify',
-            '--cert=cert.pem',
-            '--key=key.pem',
-            '8085',
-            f'{ip}:5900'
-        ])
-    except Exception as e:
-        return jsonify({'error': f'Error starting noVNC: {e}'}), 500
-    host_ip = request.host.split(':')[0]
-    url = f'http://{host_ip}:3000/novnc/vnc.html?host={host_ip}&port=8085&encrypt=1&path=/&password={password}&autoconnect=1'
-    return jsonify({'url': url})
+
 
 def caesar_shift(s, shift):
     result = []
@@ -135,7 +123,22 @@ def use_link():
     host_ip = request.host.split(':')[0]
     view_only_param = '&view_only=1' if mode == '0' else ''
     url = f'http://{host_ip}:3000/novnc/vnc.html?host={host_ip}&port=8085&encrypt=1&path=/&password={password}&autoconnect=1{view_only_param}'
+    encrypted_url = fernet.encrypt(url.encode()).decode()
+    print(f"Encrypted URL: {encrypted_url}")    
     return jsonify({'url': url})
+
+@app.route('/api/decrypt-url', methods=['POST'])
+def decrypt_url():
+    data = request.get_json()
+    encrypted_url = data.get('url')
+    if not encrypted_url:
+        return jsonify({'error': 'Missing encrypted URL'}), 400
+    try:
+        decrypted_url = fernet.decrypt(encrypted_url.encode()).decode()
+        print(f"Decrypted URL: {decrypted_url}")
+        return jsonify({'url': decrypted_url})
+    except Exception as e:
+        return jsonify({'error': f'Decryption failed: {e}'}), 400
 
 if __name__ == '__main__':
     app.run(host='0.0.0.0', port=5000)
