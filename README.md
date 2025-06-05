@@ -74,4 +74,3 @@ The application consists of the following main components:
 - Le backend exécute des commandes système, à utiliser sur un environnement de test !
 - La clé de de chiffrement de Fernet est generée aléatoirement a chaque execution
 - SSL/TSL Certificate
-- 
