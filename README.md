@@ -15,13 +15,13 @@ A modern web-based VNC (Virtual Network Computing) application that allows remot
 
 1. Install dependencies:
 
-\`\`\`bash
+
 npm install
 
 
 2. Run the development server and socket server concurrently:
 
-\`\`\`bash
+
 npm run dev:all
 
 
