@@ -16,7 +16,6 @@ VNCConnect uses the following technologies:
 
 - **Next.js**: React framework for the frontend  
 - **Flask (Python)**: Backend handling system commands for TightVNC and noVNC  
-- **WebRTC**: For direct peer-to-peer connections  
 - **Socket.IO**: For signaling and establishing WebRTC connections  
 - **Tailwind CSS**: For styling  
 - **shadcn/ui**: For UI components  
