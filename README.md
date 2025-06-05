@@ -11,55 +11,6 @@ A modern web-based VNC (Virtual Network Computing) application that allows remot
 - End-to-End Encryption
 
 
-## Getting Started
-
-1. Install dependencies:
-
-
-npm install
-
-
-2. Run the development server and socket server concurrently:
-
-
-npm run dev:all
-
-
-3. Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
-
-## Running Separately
-
-If you want to run the Next.js app and socket server separately:
-
-1. Start the Next.js development server:
-
-
-npm run dev
-
-2. Start the socket server in a separate terminal:
-
-
-npm run socket-server
-
-
-## Troubleshooting
-
-### Authentication Issues
-
-For local development, the middleware automatically creates a mock authentication token. If you're experiencing authentication issues:
-
-1. Clear your browser cookies
-2. Restart both the Next.js and socket servers
-3. Try accessing a protected route again
-
-### Socket Connection Issues
-
-If you're experiencing issues with the socket connection:
-
-1. Make sure the socket server is running on the correct port
-2. Check that the `NEXT_PUBLIC_SOCKET_SERVER_URL` environment variable is set correctly
-3. Check the browser console for any connection errors
-
 ## Architecture
 
 VNCConnect uses the following technologies:
