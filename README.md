@@ -33,12 +33,12 @@ If you want to run the Next.js app and socket server separately:
 
 1. Start the Next.js development server:
 
-\`\`\`bash
+
 npm run dev
 
 2. Start the socket server in a separate terminal:
 
-\`\`\`bash
+
 npm run socket-server
 
 
