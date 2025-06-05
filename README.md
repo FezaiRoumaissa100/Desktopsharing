@@ -54,7 +54,7 @@ The application is composed of the following main components:
    npm run dev
 
 
-##Security
+## Security
 - The backend executes system-level commands — it must be used in a controlled testing environment only.
 - A new Fernet encryption key is generated randomly on every server startup.
 - Support for SSL/TLS certificates.
