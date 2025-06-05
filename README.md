@@ -1,17 +1,14 @@
-# VNC Website Clone
+# VNC Web
 
 A modern web-based VNC (Virtual Network Computing) application that allows remote desktop access through a web browser.
 
 ## Features
 
 - Secure remote desktop access
-- Real-time chat during sessions
-- File sharing capabilities
-- Clipboard synchronization
 - Permission management
-- Session recording
-- Mobile touch controls
-
+- Browser-Based
+- Cross-Platform
+- End-to-End Encryption
 ## Environment Variables
 
 Create a `.env.local` file in the root directory with the following variables:
@@ -91,11 +88,9 @@ VNCConnect uses the following technologies:
 
 The application consists of the following main components:
 
-- **Socket Server**: Handles signaling for WebRTC connections
-- **WebRTC Manager**: Manages WebRTC connections and data channels
+- **Socket Server**: Handles signaling for  connections
 - **VNC Host**: Captures and shares the screen
 - **VNC Client**: Receives and displays the remote screen
-- **Permission System**: Manages access permissions
 
 ## License
 
@@ -103,7 +98,6 @@ The application consists of the following main components:
 
 ## Acknowledgements
 
-- [WebRTC](https://webrtc.org/)
 - [Socket.IO](https://socket.io/)
 - [Next.js](https://nextjs.org/)
 - [Tailwind CSS](https://tailwindcss.com/)
@@ -114,20 +108,17 @@ The application consists of the following main components:
 - **Frontend** : Next.js (pages, UI, appels API)
 - **Backend** : Flask (Python)
   - Gère l'exécution des commandes système pour TightVNC et noVNC
-  - Fournit des endpoints API :
-    - `/api/start-share` : Démarre le partage d'écran (TightVNC)
-    - `/api/start-novnc` : Démarre une session noVNC pour accéder à un écran distant
+ 
 
 ## Scénario d'utilisation
 
-1. **Page d'accueil** : Deux boutons
+1. **Page de Start-session** : Deux boutons
    - Partager mon écran
    - Accéder à un écran
 2. **Partager mon écran** :
-   - Le backend génère l'IP et le mot de passe, lance TightVNC
-   - Affiche les infos à l'utilisateur
+   - Le backend génère un lien chiffré avec le chiffrement de Fernet
 3. **Accéder à un écran** :
-   - L'utilisateur saisit l'IP cible
+   - L'utilisateur saisit le lien partagé depuis le host
    - Le backend lance noVNC et redirige l'utilisateur vers l'interface noVNC
 
 ## Lancement du projet
@@ -146,4 +137,6 @@ The application consists of the following main components:
 
 ## Sécurité
 - Le backend exécute des commandes système, à utiliser sur un environnement de test !
-- Le mot de passe VNC est généré aléatoirement à chaque session.
+- La clé de de chiffrement de Fernet est generée aléatoirement a chaque execution
+- SSL/TSL Certificate
+- 
