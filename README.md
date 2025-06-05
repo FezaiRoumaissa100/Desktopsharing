@@ -9,14 +9,7 @@ A modern web-based VNC (Virtual Network Computing) application that allows remot
 - Browser-Based
 - Cross-Platform
 - End-to-End Encryption
-## Environment Variables
 
-Create a `.env.local` file in the root directory with the following variables:
-
-\`\`\`
-SOCKET_PORT=3001
-NEXT_PUBLIC_SOCKET_SERVER_URL=http://localhost:3001
-\`\`\`
 
 ## Getting Started
 
@@ -24,17 +17,13 @@ NEXT_PUBLIC_SOCKET_SERVER_URL=http://localhost:3001
 
 \`\`\`bash
 npm install
-# or
-yarn install
-\`\`\`
+
 
 2. Run the development server and socket server concurrently:
 
 \`\`\`bash
 npm run dev:all
-# or
-yarn dev:all
-\`\`\`
+
 
 3. Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
 
@@ -46,17 +35,12 @@ If you want to run the Next.js app and socket server separately:
 
 \`\`\`bash
 npm run dev
-# or
-yarn dev
-\`\`\`
 
 2. Start the socket server in a separate terminal:
 
 \`\`\`bash
 npm run socket-server
-# or
-yarn socket-server
-\`\`\`
+
 
 ## Troubleshooting
 
