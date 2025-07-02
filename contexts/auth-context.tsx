@@ -18,6 +18,7 @@ type AuthContextType = {
   logout: () => void
   checkAuth: () => Promise<boolean>
   updateUserProfile: (data: Partial<User>) => Promise<boolean>
+  completeLogin: (userData: User) => void
 }
 
 const AuthContext = createContext<AuthContextType | undefined>(undefined)
@@ -107,14 +108,17 @@ export function AuthProvider({ children }: { children: ReactNode }) {
     checkUserAuth()
   }, [])
 
+  const completeLogin = (userData: User) => {
+    localStorage.setItem("auth_token", "mock-jwt-token")
+    localStorage.setItem("user_data", JSON.stringify(userData))
+    setUser(userData)
+  }
+
   const login = async (email: string, password: string): Promise<boolean> => {
     setIsLoading(true)
 
     // For demo/preview purposes - allow login with demo credentials
     if (email === "demo@example.com" && password === "password123") {
-      localStorage.setItem("auth_token", "mock-jwt-token")
-      localStorage.setItem("user_data", JSON.stringify(MOCK_USER))
-      setUser(MOCK_USER)
       setIsLoading(false)
       return true
     }
@@ -294,6 +298,7 @@ export function AuthProvider({ children }: { children: ReactNode }) {
         logout,
         checkAuth,
         updateUserProfile,
+        completeLogin,
       }}
     >
       {children}
