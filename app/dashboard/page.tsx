@@ -2,7 +2,6 @@
 
 import { useState, useEffect } from "react"
 import { useRouter } from "next/navigation"
-import { Header } from "@/components/header"
 import { Footer } from "@/components/footer"
 import { Button } from "@/components/ui/button"
 import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from "@/components/ui/card"
@@ -58,7 +57,6 @@ export default function DashboardPage() {
   return (
     <ProtectedRoute>
       <div className="flex flex-col min-h-screen">
-        <Header />
         <main className="flex-1 bg-background text-foreground">
           <div className="container px-4 md:px-6">
             <div className="flex flex-col md:flex-row justify-between items-start md:items-center mb-8">
